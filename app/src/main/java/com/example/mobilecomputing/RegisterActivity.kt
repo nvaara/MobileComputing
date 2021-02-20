@@ -64,7 +64,7 @@ class RegisterActivity : AppCompatActivity() {
         val registerButton = findViewById<Button>(R.id.button_try_register)
         val goBackButton = findViewById<Button>(R.id.button_go_back)
         goBackButton.setOnClickListener{
-            startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
 
         registerButton.setOnClickListener {
@@ -78,6 +78,7 @@ class RegisterActivity : AppCompatActivity() {
                 createUser(username.text.toString(), password.text.toString())
                 var intent = Intent(this, ProfileActivity::class.java)
                 intent.putExtra("username", username.text.toString())
+                finish()
                 startActivity(intent)
             }
         }
