@@ -25,6 +25,12 @@ class ProfileActivity : AppCompatActivity() {
 
         val signOutButton = findViewById<Button>(R.id.sign_out_button)
         val addReminderButton = findViewById<Button>(R.id.add_reminder_button)
+        val editActiveRemindersButton = findViewById<Button>(R.id.edit_active_reminders_button)
+        val updateReminders = findViewById<Button>(R.id.update_reminders_button)
+
+        updateReminders.setOnClickListener{
+            loadReminders()
+        }
 
         listView = findViewById(R.id.profile_list_view)
         adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list)
@@ -47,12 +53,18 @@ class ProfileActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        listView.setOnItemClickListener { _, _, position, _ ->
-            val uid = uidList[position]
-            var intent = Intent(this, ReminderEditActivity::class.java)
-            intent.putExtra("uid", uid)
+        editActiveRemindersButton.setOnClickListener{
+            var intent = Intent(this, ReminderView::class.java)
+            intent.putExtra("username", username)
             startActivity(intent)
         }
+
+        //listView.setOnItemClickListener { _, _, position, _ ->
+        //    val uid = uidList[position]
+        //    var intent = Intent(this, ReminderEditActivity::class.java)
+        //    intent.putExtra("uid", uid)
+        //    startActivity(intent)
+        //}
         loadReminders()
     }
 
@@ -71,8 +83,14 @@ class ProfileActivity : AppCompatActivity() {
             val db = getReminderDb(applicationContext)
             val dao = db.reminderDao()
             val reminders = dao.getRemindersForUser(username).toMutableList()
+            val newList = mutableListOf<ReminderData>()
+            for (reminder in reminders) {
+                if (reminder.reminderOccurred) {
+                    newList.add(reminder)
+                }
+            }
             db.close()
-            return reminders
+            return newList
         }
 
         override fun onPostExecute(result: MutableList<ReminderData>?) {

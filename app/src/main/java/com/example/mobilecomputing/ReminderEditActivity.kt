@@ -1,23 +1,56 @@
 package com.example.mobilecomputing
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.room.Update
+import java.text.SimpleDateFormat
 import java.time.LocalTime
+import java.util.*
 
-class ReminderEditActivity : AppCompatActivity() {
+class ReminderEditActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+    private lateinit var reminderCalendar: Calendar
+    private lateinit var textView: TextView
+
+    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+        reminderCalendar.set(Calendar.YEAR, year)
+        reminderCalendar.set(Calendar.MONTH, month)
+        reminderCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
+        TimePickerDialog(this, this,
+            reminderCalendar.get(Calendar.HOUR_OF_DAY),
+            reminderCalendar.get(Calendar.MINUTE),
+            true).show()
+    }
+
+    override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
+        reminderCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
+        reminderCalendar.set(Calendar.MINUTE, minute)
+        reminderCalendar.set(Calendar.SECOND, 0)
+        val simpleDateFormat = SimpleDateFormat("dd.MM.yyy HH:mm")
+        textView.text = simpleDateFormat.format(reminderCalendar.time)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reminder_edit)
         val editButton = findViewById<Button>(R.id.reminder_edit_button)
         val deleteButton = findViewById<Button>(R.id.reminder_edit_delete_button)
         val goBackButton = findViewById<Button>(R.id.reminder_edit_go_back)
+        textView = findViewById<TextView>(R.id.text_reminder_time_edit)
 
+        textView.setOnClickListener{
+            reminderCalendar = GregorianCalendar.getInstance()
+            DatePickerDialog(this, this,
+                reminderCalendar.get(Calendar.YEAR),
+                reminderCalendar.get(Calendar.MONTH),
+                reminderCalendar.get(Calendar.DAY_OF_MONTH)).show()
+
+        }
 
         editButton.setOnClickListener{
             val updater = UpdateReminder()
@@ -53,19 +86,19 @@ class ReminderEditActivity : AppCompatActivity() {
         val msg = findViewById<TextView>(R.id.text_reminder_edit_message).text.toString()
         val locX = findViewById<TextView>(R.id.text_reminder_edit_loc_x).text.toString()
         val locY = findViewById<TextView>(R.id.text_reminder_edit_loc_y).text.toString()
-        val time = findViewById<TextView>(R.id.text_reminder_edit_time).text.toString()
 
         if (validateString(title, "Title is empty")
             && validateString(title, "Message is empty")
             && validateString(locX, "Location X is empty")
             && validateString(locY, "Location Y is empty")
-            && validateString(time, "Time is empty")) {
+            && this::reminderCalendar.isInitialized) {
 
             oldReminderData.title = title
             oldReminderData.message = msg
             oldReminderData.locationX = locX
             oldReminderData.locationY = locY
-            oldReminderData.reminderTime = time
+            oldReminderData.reminderTime = textView.text.toString()
+            oldReminderData.reminderOccurred = false
             return true
         }
         return false
@@ -87,7 +120,6 @@ class ReminderEditActivity : AppCompatActivity() {
                 findViewById<TextView>(R.id.text_reminder_edit_message).text = result.message
                 findViewById<TextView>(R.id.text_reminder_edit_loc_x).text = result.locationX
                 findViewById<TextView>(R.id.text_reminder_edit_loc_y).text = result.locationY
-                findViewById<TextView>(R.id.text_reminder_edit_time).text = result.reminderTime
             }
         }
     }
@@ -112,9 +144,11 @@ class ReminderEditActivity : AppCompatActivity() {
         override fun doInBackground(vararg params: String?) : Boolean {
             val db = getReminderDb(applicationContext)
             val dao = db.reminderDao()
-            var reminder = dao.getReminder(intent?.extras?.get("uid").toString().toInt())
+            val uid = intent?.extras?.get("uid").toString().toInt()
+            var reminder = dao.getReminder(uid)
             if (updatedReminderData(reminder)) {
                 dao.update(reminder)
+                ReminderNotification(applicationContext, uid, reminderCalendar.timeInMillis, reminder.message)
             }
             db.close()
             return true

@@ -15,32 +15,14 @@
         android:layout_marginTop="100dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/greeting_text"
+        <Button
+            android:id="@+id/reminder_view_go_back"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="" />
+            android:text="Go Back" />
 
         <Button
-            android:id="@+id/sign_out_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/sign_out" />
-
-        <Button
-            android:id="@+id/add_reminder_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/add_reminder" />
-
-        <Button
-            android:id="@+id/edit_active_reminders_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Edit Reminders" />
-
-        <Button
-            android:id="@+id/update_reminders_button"
+            android:id="@+id/reminder_view_update"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Update" />
@@ -49,10 +31,10 @@
             android:id="@+id/edit_reminder_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Occurred reminders:" />
+            android:text="Edit or delete reminders by touching them" />
 
         <ListView
-            android:id="@+id/profile_list_view"
+            android:id="@+id/reminder_list_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </ListView>

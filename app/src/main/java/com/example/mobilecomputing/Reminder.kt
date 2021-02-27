@@ -12,7 +12,8 @@ data class ReminderData(
     @ColumnInfo(name = "reminder_time") var reminderTime : String,
     @ColumnInfo(name = "creation_time") var creationTime : String,
     @ColumnInfo(name = "creator_id") var creatorId : String,
-    @ColumnInfo(name = "reminder_seen") var reminderSeen : Boolean
+    @ColumnInfo(name = "reminder_seen") var reminderSeen : Boolean,
+    @ColumnInfo(name = "reminder_occurred") var reminderOccurred : Boolean
 )
 
 @Dao
@@ -25,7 +26,7 @@ interface ReminderDao {
     fun getReminder(id: Int): ReminderData
 
     @Insert
-    fun insert(reminderData: ReminderData)
+    fun insert(reminderData: ReminderData) : Long
 
     @Update
     fun update(reminderData: ReminderData)
@@ -42,4 +43,9 @@ abstract class ReminderDatabase : RoomDatabase() {
 public fun getReminderDb(context: Context) : ReminderDatabase {
     return Room.databaseBuilder(context,
         ReminderDatabase::class.java, "reminder-database").build()
+}
+
+public fun getReminderDbMainThread(context: Context) : ReminderDatabase {
+    return Room.databaseBuilder(context,
+        ReminderDatabase::class.java, "reminder-database").allowMainThreadQueries().build()
 }

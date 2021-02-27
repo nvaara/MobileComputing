@@ -3,4 +3,5 @@
     <string name="shared_preference">com.example.mobilecomputing.PREFERENCE_FILE_KEY</string>
     <string name="add_reminder">Add Reminder</string>
     <string name="sign_out">Sign Out</string>
+    <string name="edit_active_reminders">Edit Active Reminders</string>
 </resources>
