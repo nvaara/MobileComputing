@@ -84,19 +84,15 @@ class ReminderEditActivity : AppCompatActivity(), DatePickerDialog.OnDateSetList
     private fun updatedReminderData(oldReminderData: ReminderData) : Boolean {
         val title = findViewById<TextView>(R.id.text_reminder_edit_title).text.toString()
         val msg = findViewById<TextView>(R.id.text_reminder_edit_message).text.toString()
-        val locX = findViewById<TextView>(R.id.text_reminder_edit_loc_x).text.toString()
-        val locY = findViewById<TextView>(R.id.text_reminder_edit_loc_y).text.toString()
 
         if (validateString(title, "Title is empty")
             && validateString(title, "Message is empty")
-            && validateString(locX, "Location X is empty")
-            && validateString(locY, "Location Y is empty")
             && this::reminderCalendar.isInitialized) {
 
             oldReminderData.title = title
             oldReminderData.message = msg
-            oldReminderData.locationX = locX
-            oldReminderData.locationY = locY
+            oldReminderData.locationX = ""
+            oldReminderData.locationY = ""
             oldReminderData.reminderTime = textView.text.toString()
             oldReminderData.reminderOccurred = false
             return true
@@ -118,8 +114,6 @@ class ReminderEditActivity : AppCompatActivity(), DatePickerDialog.OnDateSetList
             if (result != null) {
                 findViewById<TextView>(R.id.text_reminder_edit_title).text = result.title
                 findViewById<TextView>(R.id.text_reminder_edit_message).text = result.message
-                findViewById<TextView>(R.id.text_reminder_edit_loc_x).text = result.locationX
-                findViewById<TextView>(R.id.text_reminder_edit_loc_y).text = result.locationY
             }
         }
     }

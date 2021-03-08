@@ -37,22 +37,6 @@
             android:hint="Message"
             android:inputType="text"
             android:lineSpacingExtra="8sp" />
-        <EditText
-            android:id="@+id/text_reminder_edit_loc_x"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Location X"
-            android:inputType="text"
-            android:lineSpacingExtra="8sp" />
-        <EditText
-            android:id="@+id/text_reminder_edit_loc_y"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Location Y"
-            android:inputType="text"
-            android:lineSpacingExtra="8sp" />
 
         <TextView
             android:id="@+id/text_reminder_time_edit"

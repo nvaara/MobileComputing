@@ -1,5 +1,6 @@
 package com.example.mobilecomputing
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
@@ -25,6 +26,7 @@ class ProfileActivity : AppCompatActivity() {
 
         val signOutButton = findViewById<Button>(R.id.sign_out_button)
         val addReminderButton = findViewById<Button>(R.id.add_reminder_button)
+        val addLocationReminder = findViewById<Button>(R.id.add_location_reminder_button)
         val editActiveRemindersButton = findViewById<Button>(R.id.edit_active_reminders_button)
         val updateReminders = findViewById<Button>(R.id.update_reminders_button)
 
@@ -49,6 +51,12 @@ class ProfileActivity : AppCompatActivity() {
 
         addReminderButton.setOnClickListener{
             var intent = Intent(this, ReminderAddActivity::class.java)
+            intent.putExtra("username", username)
+            startActivity(intent)
+        }
+
+        addLocationReminder.setOnClickListener {
+            var intent = Intent(this, AddLocationReminder::class.java)
             intent.putExtra("username", username)
             startActivity(intent)
         }

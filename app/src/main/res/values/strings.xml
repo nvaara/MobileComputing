@@ -4,4 +4,6 @@
     <string name="add_reminder">Add Reminder</string>
     <string name="sign_out">Sign Out</string>
     <string name="edit_active_reminders">Edit Active Reminders</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_location_picker">Map</string>
 </resources>

@@ -53,7 +53,7 @@ class AsyncReminder(private val context: Context, params: WorkerParameters) : Wo
         }
 
         var uid = inputData.getInt("uid", 0)
-        val db = getReminderDbMainThread(applicationContext)
+        val db = getReminderDb(applicationContext)
         val dao = db.reminderDao()
         var reminder = dao.getReminder(uid)
         reminder.reminderOccurred = true

@@ -16,7 +16,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/text_reminder_title"
+            android:id="@+id/text_location_reminder_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -24,7 +24,7 @@
             android:inputType="text"
             android:lineSpacingExtra="8sp" />
         <EditText
-            android:id="@+id/text_reminder_message"
+            android:id="@+id/text_location_reminder_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -33,21 +33,21 @@
             android:lineSpacingExtra="8sp" />
 
         <TextView
-            android:id="@+id/text_reminder_time"
+            android:id="@+id/text_reminder_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Tap To Pick Reminder Time"
+            android:hint="Tap To Pick Location"
             android:textSize="20sp"
             android:gravity="center"/>
 
         <Button
-            android:id="@+id/reminder_add_confirm"
+            android:id="@+id/reminder_location_add_confirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add" />
+            android:text="Add Reminder" />
 
         <Button
-            android:id="@+id/reminder_add_go_back"
+            android:id="@+id/reminder_time_add_go_back"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Go back" />

@@ -91,13 +91,9 @@ class ReminderAddActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
     private fun tryConstructReminderData() : ReminderData? {
         val title = findViewById<TextView>(R.id.text_reminder_title).text.toString()
         val msg = findViewById<TextView>(R.id.text_reminder_message).text.toString()
-        val locX = findViewById<TextView>(R.id.text_reminder_loc_x).text.toString()
-        val locY = findViewById<TextView>(R.id.text_reminder_loc_y).text.toString()
 
         if (validateString(title, "Title is empty")
             && validateString(title, "Message is empty")
-            && validateString(locX, "Location X is empty")
-            && validateString(locY, "Location Y is empty")
             && this::reminderCalendar.isInitialized) {
 
             val username = intent?.extras?.get("username").toString()
@@ -106,8 +102,8 @@ class ReminderAddActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
             return ReminderData(null,
                     title,
                     msg,
-                    locX,
-                    locY,
+                    "",
+                    "",
                     textView.text.toString(),
                     creationTime.toString(),
                     username,

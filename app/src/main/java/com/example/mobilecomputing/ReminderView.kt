@@ -39,9 +39,15 @@ class ReminderView : AppCompatActivity() {
         listView.setOnItemClickListener { _, _, position, _ ->
             val reminder = reminderList[position]
             if (reminder.reminderOccurred) {
+                if (reminder.locationX.isEmpty()) {
                 var intent = Intent(this, ReminderEditActivity::class.java)
                 intent.putExtra("uid", reminder.uid)
                 startActivity(intent)
+                } else {
+                    var intent = Intent(this, EditLocationReminderActivity::class.java)
+                    intent.putExtra("uid", reminder.uid)
+                    startActivity(intent)
+                }
             } else {
                 Toast.makeText(this, "Reminder is still active!", Toast.LENGTH_LONG).show()
             }

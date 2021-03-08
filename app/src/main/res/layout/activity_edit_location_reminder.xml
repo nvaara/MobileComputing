@@ -15,54 +15,48 @@
         android:layout_marginTop="100dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/greeting_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="" />
-
         <Button
-            android:id="@+id/sign_out_button"
+            android:id="@+id/reminder_edit_location_delete_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/sign_out" />
+            android:text="Delete Reminder" />
 
-        <Button
-            android:id="@+id/add_reminder_button"
-            android:layout_width="match_parent"
+        <EditText
+            android:id="@+id/text_reminder_location_edit_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Time Reminder" />
-
-        <Button
-            android:id="@+id/add_location_reminder_button"
-            android:layout_width="match_parent"
+            android:ems="10"
+            android:hint="Title"
+            android:inputType="text"
+            android:lineSpacingExtra="8sp" />
+        <EditText
+            android:id="@+id/text_reminder_location_edit_message"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Location Reminder" />
-
-        <Button
-            android:id="@+id/edit_active_reminders_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Edit Reminders" />
-
-        <Button
-            android:id="@+id/update_reminders_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Update" />
+            android:ems="10"
+            android:hint="Message"
+            android:inputType="text"
+            android:lineSpacingExtra="8sp" />
 
         <TextView
-            android:id="@+id/edit_reminder_text"
+            android:id="@+id/text_reminder_location_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Occurred reminders:" />
+            android:hint="Tap To Pick Location"
+            android:textSize="20sp"
+            android:gravity="center"/>
 
-        <ListView
-            android:id="@+id/profile_list_view"
+        <Button
+            android:id="@+id/reminder_edit_location_button"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </ListView>
+            android:layout_height="wrap_content"
+            android:text="Save Changes" />
 
+        <Button
+            android:id="@+id/reminder_edit_location_go_back"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Go back" />
     </LinearLayout>
 
 </RelativeLayout>
